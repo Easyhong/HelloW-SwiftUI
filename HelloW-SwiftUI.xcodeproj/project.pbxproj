@@ -18,6 +18,13 @@
 		6BCCC02524A9AE1F00BE6896 /* HelloW_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCCC02424A9AE1F00BE6896 /* HelloW_SwiftUIUITests.swift */; };
 		6BCCC03324A9C65500BE6896 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCCC03224A9C65500BE6896 /* RootView.swift */; };
 		6BCCC03724A9EB7B00BE6896 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCCC03624A9EB7B00BE6896 /* VideoPlayer.swift */; };
+		6BEAC88724AAE46A0053FA8D /* SwiftUITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAC88624AAE46A0053FA8D /* SwiftUITableView.swift */; };
+		6BEAC89224AB0D430053FA8D /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEAC89124AB0D430053FA8D /* TravelView.swift */; };
+		6BEAC89C24AB10280053FA8D /* Contents.json in Resources */ = {isa = PBXBuildFile; fileRef = 6BEAC89B24AB10280053FA8D /* Contents.json */; };
+		6BEAC8A124AB103A0053FA8D /* alemania.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BEAC89D24AB103A0053FA8D /* alemania.jpg */; };
+		6BEAC8A224AB103A0053FA8D /* brazil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BEAC89E24AB103A0053FA8D /* brazil.jpg */; };
+		6BEAC8A324AB103A0053FA8D /* africa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BEAC89F24AB103A0053FA8D /* africa.jpg */; };
+		6BEAC8A424AB103A0053FA8D /* rd.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BEAC8A024AB103A0053FA8D /* rd.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +63,13 @@
 		6BCCC02624A9AE1F00BE6896 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BCCC03224A9C65500BE6896 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		6BCCC03624A9EB7B00BE6896 /* VideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		6BEAC88624AAE46A0053FA8D /* SwiftUITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITableView.swift; sourceTree = "<group>"; };
+		6BEAC89124AB0D430053FA8D /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
+		6BEAC89B24AB10280053FA8D /* Contents.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contents.json; sourceTree = "<group>"; };
+		6BEAC89D24AB103A0053FA8D /* alemania.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = alemania.jpg; sourceTree = "<group>"; };
+		6BEAC89E24AB103A0053FA8D /* brazil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = brazil.jpg; sourceTree = "<group>"; };
+		6BEAC89F24AB103A0053FA8D /* africa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = africa.jpg; sourceTree = "<group>"; };
+		6BEAC8A024AB103A0053FA8D /* rd.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rd.jpg; sourceTree = "<group>"; };
 		8555E40B3BCF265C4BF43610 /* Pods-HelloW-SwiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HelloW-SwiftUI.debug.xcconfig"; path = "Target Support Files/Pods-HelloW-SwiftUI/Pods-HelloW-SwiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,15 +132,22 @@
 		6BCCC00124A9AE1D00BE6896 /* HelloW-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				6BEAC89F24AB103A0053FA8D /* africa.jpg */,
+				6BEAC89D24AB103A0053FA8D /* alemania.jpg */,
+				6BEAC89E24AB103A0053FA8D /* brazil.jpg */,
+				6BEAC8A024AB103A0053FA8D /* rd.jpg */,
+				6BEAC89B24AB10280053FA8D /* Contents.json */,
 				6BCCC00224A9AE1D00BE6896 /* AppDelegate.swift */,
 				6BCCC00424A9AE1D00BE6896 /* SceneDelegate.swift */,
 				6BCCC00624A9AE1D00BE6896 /* ContentView.swift */,
 				6BCCC03624A9EB7B00BE6896 /* VideoPlayer.swift */,
 				6BCCC03224A9C65500BE6896 /* RootView.swift */,
+				6BEAC89124AB0D430053FA8D /* TravelView.swift */,
 				6BCCC00824A9AE1E00BE6896 /* Assets.xcassets */,
 				6BCCC00D24A9AE1E00BE6896 /* LaunchScreen.storyboard */,
 				6BCCC01024A9AE1E00BE6896 /* Info.plist */,
 				6BCCC00A24A9AE1E00BE6896 /* Preview Content */,
+				6BEAC88624AAE46A0053FA8D /* SwiftUITableView.swift */,
 			);
 			path = "HelloW-SwiftUI";
 			sourceTree = "<group>";
@@ -273,8 +294,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BCCC00F24A9AE1E00BE6896 /* LaunchScreen.storyboard in Resources */,
+				6BEAC8A224AB103A0053FA8D /* brazil.jpg in Resources */,
+				6BEAC8A124AB103A0053FA8D /* alemania.jpg in Resources */,
+				6BEAC8A424AB103A0053FA8D /* rd.jpg in Resources */,
+				6BEAC8A324AB103A0053FA8D /* africa.jpg in Resources */,
 				6BCCC00C24A9AE1E00BE6896 /* Preview Assets.xcassets in Resources */,
 				6BCCC00924A9AE1E00BE6896 /* Assets.xcassets in Resources */,
+				6BEAC89C24AB10280053FA8D /* Contents.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +369,9 @@
 			files = (
 				6BCCC03324A9C65500BE6896 /* RootView.swift in Sources */,
 				6BCCC03724A9EB7B00BE6896 /* VideoPlayer.swift in Sources */,
+				6BEAC89224AB0D430053FA8D /* TravelView.swift in Sources */,
 				6BCCC00324A9AE1D00BE6896 /* AppDelegate.swift in Sources */,
+				6BEAC88724AAE46A0053FA8D /* SwiftUITableView.swift in Sources */,
 				6BCCC00524A9AE1D00BE6896 /* SceneDelegate.swift in Sources */,
 				6BCCC00724A9AE1D00BE6896 /* ContentView.swift in Sources */,
 			);

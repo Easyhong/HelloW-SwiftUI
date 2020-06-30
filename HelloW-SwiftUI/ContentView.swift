@@ -40,17 +40,13 @@ struct ContentView: View {
                                          }
                                          .padding()
                                           //   .frame(minWidth: 0, maxWidth: .infinity)
-
                                          .foregroundColor(.white)
-                                             
-                                             .background(LinearGradient(gradient: Gradient(colors: [Color("DarkGreen"), Color("LightGreen")]), startPoint: .leading, endPoint: .trailing))
-                                             .cornerRadius(40)
+                                         .background(LinearGradient(gradient: Gradient(colors: [Color("DarkGreen"), Color("LightGreen")]), startPoint: .leading, endPoint: .trailing))
+                                         .cornerRadius(40)
                                      }
-                         
-                         }
+                              }
                             
-                         
-                     }
+                      }
                      
                  }.padding(.vertical, 10)
                  
