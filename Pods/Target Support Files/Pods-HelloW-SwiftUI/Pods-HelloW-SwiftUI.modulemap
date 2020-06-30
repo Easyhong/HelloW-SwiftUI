@@ -1,0 +1,6 @@
+framework module Pods_HelloW_SwiftUI {
+  umbrella header "Pods-HelloW-SwiftUI-umbrella.h"
+
+  export *
+  module * { export * }
+}
