@@ -11,17 +11,12 @@ import AVFoundation
 import SwiftUI
 import GSPlayer
 
-@available(iOS 13, *)
 public struct VideoPlayer {
     
     public enum State {
-          /// From the first load to get the first frame of the video
           case loading
-          /// Playing now
           case playing(totalDuration: Double)
-          /// Pause, will be called repeatedly when the buffer progress changes
           case paused(playProgress: Double, bufferProgress: Double)
-          /// An error occurred and cannot continue playing
           case error(NSError)
       }
     
@@ -41,7 +36,6 @@ public struct VideoPlayer {
 }
 
 
-@available(iOS 13, *)
 public extension VideoPlayer {
     
     /// Set the preload size, the default value is 1024 * 1024, unit is byte.
@@ -65,10 +59,11 @@ public extension VideoPlayer {
     }
 }
 
-@available(iOS 13, *)
+// @available(iOS 13, *)
 public extension VideoPlayer {
     
     struct Config {
+        
         struct Handler {
             var onBufferChanged: ((Double) -> Void)?
             var onPlayToEndTime: (() -> Void)?
@@ -78,18 +73,17 @@ public extension VideoPlayer {
         
         var autoReplay: Bool = false
         var mute: Bool = false
-        
         var handler: Handler = Handler()
     }
     
-    /// Whether the video will be automatically replayed until the end of the video playback.
+    // 是否自动重复播放
     func autoReplay(_ value: Bool) -> Self {
         var view = self
         view.config.autoReplay = value
         return view
     }
     
-    /// Whether the video is muted, only for this instance.
+    // 是否静音
     func mute(_ value: Bool) -> Self {
         var view = self
         view.config.mute = value
@@ -127,7 +121,7 @@ public extension VideoPlayer {
     
 }
 
-@available(iOS 13, *)
+// @available(iOS 13, *)
 extension VideoPlayer: UIViewRepresentable {
     
     public func makeUIView(context: Context) -> VideoPlayerView {
@@ -228,10 +222,13 @@ private extension VideoPlayerView {
         switch state {
         case .none, .loading:
             return .loading
+            
         case .playing:
             return .playing(totalDuration: totalDuration)
+            
         case .paused(let p, let b):
             return .paused(playProgress: p, bufferProgress: b)
+            
         case .error(let error):
             return .error(error)
         }

@@ -13,6 +13,7 @@ struct Info : Identifiable {
 }
 
 struct TravelView: View {
+    
     var infos : [Info] = [
     .init(id: 0, names: "Dom Rep", details: "Enjoy the best places from dom Rep, Beaches, Hotels, etc.", prices: "$350", image: "rd",from: "5:00 am", to: "6:00 am"),
     .init(id: 1, names: "Germany", details: "Enjoy the best places from dom Rep, Beaches, Hotels, etc.", prices: "$100", image: "alemania",from: "6:00 am", to: "7:00 am"),
@@ -22,28 +23,29 @@ struct TravelView: View {
     .init(id: 5, names: "Colombia", details: "Enjoy the best places from dom Rep, Beaches, Hotels, etc.", prices: "$300", image: "Colombia",from: "11:00 am", to: "12:00 am")]
     
     @State var rating = UserDefaults.standard.integer(forKey: "rating")
+    
     var body: some View {
         ZStack {
         Rectangle()
             .fill(Color("back"))
             .edgesIgnoringSafeArea(.all)
-        //VStack {
-            
-                
-                
+       
             ScrollView(.vertical,showsIndicators: false) {
                 ZStack {
-                    Image("ucrania")
+                    Image("africa")
                     .resizable()
-                        .frame(width: UIScreen.main.bounds.width - 0, height: 260)
+                    .frame(width: UIScreen.main.bounds.width, height: 260)
                     
                     VStack(alignment: .leading) {
-                    HStack/*(alignment: .top)*/ {
-                        Button(action: {}) {
+                        
+                      HStack(alignment: .top) {
+                        
+                        Button(action: {
+                            
+                        }) {
                             Image(systemName: "square.and.arrow.up")
                                 .font(.title)
                                 .foregroundColor(.white)
-                            
                         }
                         
                         Spacer()
@@ -60,33 +62,36 @@ struct TravelView: View {
                             .font(.title)
                             .foregroundColor(.white)
                         }
-                        }//HStack child
+                            
+                      }//HStack child
+                        
                     }.padding()
-                    .offset(y: 35)
+                     .offset(y: 35)
                         
                         VStack(alignment: .leading, spacing: 5) {
                         Spacer()
-                            Text("Ucraina").bold()
+                        Text("Ucraina")
+                            .bold()
                             .padding(6)
-                        .font(.title)
-                        .foregroundColor(.white)
-                                .background(Color.black.opacity(0.45))
+                            .font(.title)
+                            .foregroundColor(.gray)
+                            .background(Color.white.opacity(0.45))
                             .cornerRadius(5)
+                            
                             HStack {
                                 Group {
                                 Image(systemName: "paperplane.fill")
-                                
-                            Text("Kiev")
+                                Text("Kiev")
                                     
                                 }.padding(2)
-                                .font(.caption)
-                                .foregroundColor(.white)
+                                 .font(.caption)
+                                 .foregroundColor(.white)
                                         .background(Color.black.opacity(0.75))
                                     .cornerRadius(5)//Group
                                 Spacer()
                                 
                                 Text("$300").bold()
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.black)
                             }
                             
                         }.padding()
@@ -100,16 +105,16 @@ struct TravelView: View {
                         Rectangle()
                             .fill(Color("back"))
                             .frame(width: UIScreen.main.bounds.width - 32, height: 210)
-                        .cornerRadius(16)
+                            .cornerRadius(16)
                             .shadow(color: Color("light"),radius: 6,x: -6, y: -6)
-                        .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)
+                            .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)
                         
                         HStack(alignment: .top) {
-                    Image(info.image)
-                        .renderingMode(.original)
-                    .resizable()
-                        .frame(width: 160, height: 200)
-                        .cornerRadius(16)
+                            Image(info.image)
+                                .renderingMode(.original)
+                                .resizable()
+                                .frame(width: 160, height: 200)
+                                .cornerRadius(16)
                             
                             VStack(alignment: .leading, spacing: 10) {
                         
@@ -117,12 +122,11 @@ struct TravelView: View {
                                 .bold()
                                 .font(.headline)
                                 
-                                
-                                Text(info.details)
+                            Text(info.details)
                                 .lineLimit(9)
                                 
                                 //Start rating
-                                VStack(alignment: .leading,spacing: 10) {
+                             VStack(alignment: .leading,spacing: 10) {
                                 HStack {
                                     ForEach(0..<5 , id: \.self) { star in
                                         HStack {
@@ -134,41 +138,40 @@ struct TravelView: View {
                                                     .foregroundColor(self.rating >= star ? .yellow : .gray)
                                             }//Btn Star
                                             }.padding(1)
-                                        .background(Color("back"))
-                                        
-                                        .shadow(color: Color("light"),radius: 6,x: -6, y: -6)
-                                        .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)//HStack child
+                                            .background(Color("back"))
+                                            .shadow(color: Color("light"),radius: 6,x: -6, y: -6)
+                                            .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)//HStack child
                                     }//ForEach Star
                                 } //Main HStack Star
                                 //End rating
                                 
                                 //Start from
-                                HStack {
+                             HStack {
                                     Text(info.from)
                                         .font(.caption)
                                         .padding(4)
                                         //.foregroundColor(.white)
                                         .background(Color("back"))
                                         .cornerRadius(5)
-                                    .shadow(color: Color("light"),radius: 6,x: -6, y: -6)
-                                    .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)
+                                        .shadow(color: Color("light"),radius: 6,x: -6, y: -6)
+                                        .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)
                                     
                                     Text(info.to)
-                                    .font(.caption)
-                                    .padding(4)
-                                    //.foregroundColor(.black)
-                                    .background(Color("back"))
-                                    .cornerRadius(5)
-                                    .shadow(color: Color("light"),radius: 6,x: -6, y: -6)
-                                    .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)
+                                        .font(.caption)
+                                        .padding(4)
+                                        //.foregroundColor(.black)
+                                        .background(Color("back"))
+                                        .cornerRadius(5)
+                                        .shadow(color: Color("light"),radius: 6,x: -6, y: -6)
+                                        .shadow(color: Color("dark"),radius: 6,x: 6, y: 6)
                                 }//End to
                             }//
                             }//VStack Img,names,details, etc
                             
                             VStack (alignment: .leading) {
                             Text(info.prices)
-                            .bold()
-                            .font(.headline)
+                                .bold()
+                                .font(.headline)
                             
                                 Text("per week")
                             }//.foregroundColor(.black)//VStack prices
@@ -180,9 +183,6 @@ struct TravelView: View {
         }.edgesIgnoringSafeArea(.top)
     }
 }
-
-//You could find the source code on the description, i will leave the GitHub Link on it.
-//I hope you like it.
 
 struct TravelView_Previews: PreviewProvider {
     static var previews: some View {
