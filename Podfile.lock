@@ -1,5 +1,5 @@
 PODS:
-  - GSPlayer (0.2.11)
+  - GSPlayer (0.2.16)
 
 DEPENDENCIES:
   - GSPlayer
@@ -9,8 +9,8 @@ SPEC REPOS:
     - GSPlayer
 
 SPEC CHECKSUMS:
-  GSPlayer: 48a833e8bdde2d1d2343dfabcc5381766f1bbac3
+  GSPlayer: 823f0b085a227fa4a6f853e5edbe70f7e2b28b76
 
 PODFILE CHECKSUM: 62cdb9372e39963cdbc07ec36d51377148d44e67
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.2

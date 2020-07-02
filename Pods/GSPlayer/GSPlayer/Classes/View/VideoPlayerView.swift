@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-public class VideoPlayerView: UIView {
+open class VideoPlayerView: UIView {
     
     public enum State {
         
@@ -29,7 +29,7 @@ public class VideoPlayerView: UIView {
         case error(NSError)
     }
     
-    public enum PausedReason {
+    public enum PausedReason: Int {
         
         /// Pause because the player is not visible, stateDidChanged is not called when the buffer progress changes
         case hidden
@@ -44,6 +44,9 @@ public class VideoPlayerView: UIView {
     /// An object that manages a player's visual output.
     public let playerLayer = AVPlayerLayer()
     
+    /// URL currently playing.
+    public private(set) var playerURL: URL?
+    
     /// Get current video status.
     public private(set) var state: State = .none {
         didSet { stateDidChanged(state: state, previous: oldValue) }
@@ -56,25 +59,25 @@ public class VideoPlayerView: UIView {
     public private(set) var replayCount: Int = 0
     
     /// Whether the video will be automatically replayed until the end of the video playback.
-    public var isAutoReplay: Bool = true
+    open var isAutoReplay: Bool = true
     
     /// Play to the end time.
-    public var playToEndTime: (() -> Void)?
+    open var playToEndTime: (() -> Void)?
     
     /// Playback status changes, such as from play to pause.
-    public var stateDidChanged: ((State) -> Void)?
+    open var stateDidChanged: ((State) -> Void)?
     
     /// Replay after playing to the end.
-    public var replay: (() -> Void)?
+    open var replay: (() -> Void)?
     
     /// Whether the video is muted, only for this instance.
-    public var isMuted: Bool {
+    open var isMuted: Bool {
         get { return player?.isMuted ?? false }
         set { player?.isMuted = newValue }
     }
     
     /// Video volume, only for this instance.
-    public var volume: Double {
+    open var volume: Double {
         get { return player?.volume.double ?? 0 }
         set { player?.volume = newValue.float }
     }
@@ -112,7 +115,6 @@ public class VideoPlayerView: UIView {
     private var isLoaded = false
     private var isReplay = false
     
-    private var playerURL: URL?
     private var playerBufferingObservation: NSKeyValueObservation?
     private var playerItemKeepUpObservation: NSKeyValueObservation?
     private var playerItemStatusObservation: NSKeyValueObservation?
@@ -121,7 +123,7 @@ public class VideoPlayerView: UIView {
     
     // MARK: - Lifecycle
     
-    public override var contentMode: UIView.ContentMode {
+    open override var contentMode: UIView.ContentMode {
         didSet {
             switch contentMode {
             case .scaleAspectFill:  playerLayer.videoGravity = .resizeAspectFill
@@ -141,7 +143,7 @@ public class VideoPlayerView: UIView {
         configureInit()
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         guard playerLayer.superlayer == layer else { return }
         
@@ -150,15 +152,14 @@ public class VideoPlayerView: UIView {
         playerLayer.frame = bounds
         CATransaction.commit()
     }
-    
 }
 
-public extension VideoPlayerView {
+@objc extension VideoPlayerView {
     
     /// Play a video of the specified url.
     ///
     /// - Parameter url: Can be a local or remote URL
-    func play(for url: URL) {
+    open func play(for url: URL) {
         guard playerURL != url else {
             pausedReason = .waitingKeepUp
             player?.play()
@@ -197,47 +198,54 @@ public extension VideoPlayerView {
         observe(playerItem: playerItem)
     }
     
-    /// Pause video.
-    ///
-    /// - Parameter reason: Reason for pause
-    func pause(reason: PausedReason) {
-        pausedReason = reason
-        player?.pause()
-    }
-    
     /// Continue playing video.
-    func resume() {
+    open func resume() {
         pausedReason = .waitingKeepUp
         player?.play()
     }
     
+    /// Pause video.
+    open func pause() {
+        player?.pause()
+    }
+    
     /// Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted.
-    func seek(to time: CMTime, completion: ((Bool) -> Void)? = nil) {
+    open func seek(to time: CMTime, completion: ((Bool) -> Void)? = nil) {
         player?.seek(to: time) { completion?($0) }
     }
     
     /// Moves the playback cursor within a specified time bound and invokes the specified block when the seek operation has either been completed or been interrupted.
-    func seek(to time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completion: @escaping (Bool) -> Void) {
+    open func seek(to time: CMTime, toleranceBefore: CMTime, toleranceAfter: CMTime, completion: @escaping (Bool) -> Void) {
         player?.seek(to: time, toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter, completionHandler: completion)
     }
     
     /// Requests invocation of a block when specified times are traversed during normal playback.
     @discardableResult
-    func addBoundaryTimeObserver(forTimes times: [CMTime], queue: DispatchQueue? = nil, using: @escaping () -> Void) -> Any? {
+    open func addBoundaryTimeObserver(forTimes times: [CMTime], queue: DispatchQueue? = nil, using: @escaping () -> Void) -> Any? {
         return player?.addBoundaryTimeObserver(forTimes: times.map { NSValue(time: $0) }, queue: queue, using: using)
     }
     
     /// Requests invocation of a block during playback to report changing time.
     @discardableResult
-    func addPeriodicTimeObserver(forInterval interval: CMTime, queue: DispatchQueue? = nil, using: @escaping (CMTime) -> Void) -> Any? {
+    open func addPeriodicTimeObserver(forInterval interval: CMTime, queue: DispatchQueue? = nil, using: @escaping (CMTime) -> Void) -> Any? {
         return player?.addPeriodicTimeObserver(forInterval: interval, queue: queue, using: using)
     }
     
     /// Cancels a previously registered periodic or boundary time observer.
-    func removeTimeObserver(_ observer: Any) {
+    open func removeTimeObserver(_ observer: Any) {
         player?.removeTimeObserver(observer)
     }
+}
+
+public extension VideoPlayerView {
     
+    /// Pause video.
+    ///
+    /// - Parameter reason: Reason for pause
+    func pause(reason: PausedReason) {
+        pausedReason = reason
+        pause()
+    }
 }
 
 private extension VideoPlayerView {
@@ -246,7 +254,6 @@ private extension VideoPlayerView {
         get { return playerLayer.player }
         set { playerLayer.player = newValue }
     }
-    
 }
 
 private extension VideoPlayerView {
