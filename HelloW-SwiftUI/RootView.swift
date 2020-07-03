@@ -52,6 +52,9 @@ struct RootView : View {
     @State private var totalDuration: Double = 0
     @State private var playProgressWidth: CGFloat = 0
     
+    // 进度条宽度
+    private static let progressWidth = UIScreen.main.bounds.width - 40
+    
     var body: some View {
         
         VStack {
@@ -76,9 +79,9 @@ struct RootView : View {
                                 
                                 DispatchQueue.global(qos: .background).async {
                                  while true {
-                                    let screenWidth = UIScreen.main.bounds.width - 20
+                                  
                                     let curreenProgress = self.time.seconds / self.totalDuration
-                                    let playProgressWidth = CGFloat(curreenProgress)  * screenWidth
+                                    let playProgressWidth = CGFloat(curreenProgress) * RootView.progressWidth
                                     self.playProgressWidth = playProgressWidth
                                     }
                                 }
@@ -102,49 +105,50 @@ struct RootView : View {
                 }
                    .onDisappear { self.isPlay = false }
            
-            
-            ZStack(alignment: .leading, content: {
-                Capsule().fill(Color.black).frame(height: 4).padding(10)
-                Capsule().fill(Color.white).frame(width: self.playProgressWidth, height: 4).padding(10)
-
-            })
-            
-            
+            //
             HStack {
-                Button(self.isPlay ? "暂停" : "播放") {
-                    self.isPlay.toggle()
+                Text(getTimeString()).font(.system(size: 12)).foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
+                ZStack(alignment: .leading, content: {
+                    Capsule().fill(Color.gray).frame(height: 2).padding(EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    Capsule().fill(Color.init(red: 0.9, green: 0.9, blue: 0.9)).frame(width: self.playProgressWidth, height: 2).padding(EdgeInsets.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+
+                })
+                Text(getTotalDurationString()).font(.system(size: 12)).foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
+            }.padding(EdgeInsets(top: -20, leading: 20, bottom: -20, trailing: 20))
+            
+            
+            ZStack {
+                Rectangle().frame(width: UIScreen.main.bounds.width, height: 30).foregroundColor(Color.black)
+                HStack {
+                    Button(self.isPlay ? "暂停" : "播放") {
+                        self.isPlay.toggle()
+                        
+                    }.foregroundColor(Color.white)
+                    Button(self.mute ? "🔊关" : "🔊开") {
+                        self.mute.toggle()
+                    }.foregroundColor(Color.white)
+
+                    Divider().frame(height: 20)
+
+                    Button(self.autoReplay ? "自动播放开" : "自动播放关") {
+                        self.autoReplay.toggle()
+                    }.foregroundColor(Color.white)
+                    Divider().frame(height: 20)
+//                    Text("\(getTimeString()) / \(getTotalDurationString())")
+                    
+                  Button("快退30s") {
+                    self.time = CMTimeMakeWithSeconds(max(0, self.time.seconds - 30), preferredTimescale: self.time.timescale)
+                    }.foregroundColor(Color.white)
+                  Divider().frame(height: 20)
+                  Button("快进30s") {
+                    self.time = CMTimeMakeWithSeconds(min(self.totalDuration, self.time.seconds + 30), preferredTimescale: self.time.timescale)
+                  }.foregroundColor(Color.white)
+                    
+                    Button("全屏") {
+                        
+                    }.foregroundColor(Color.white)
                 }
-
-                Divider().frame(height: 30)
-
-                Button(self.mute ? "声音关" : "声音开") {
-                    self.mute.toggle()
-                }
-
-                Divider().frame(height: 20)
-
-                Button(self.autoReplay ? "自动播放开" : "自动播放关") {
-                    self.autoReplay.toggle()
-                }
-                Divider().frame(height: 20)
-                Text("\(getTimeString()) / \(getTotalDurationString())")
-            }
-
-            HStack {
-                Button("快退5s") {
-                    self.time = CMTimeMakeWithSeconds(max(0, self.time.seconds - 5), preferredTimescale: self.time.timescale)
-                }
-
-                Divider().frame(height: 20)
-
-                
-
-                Divider().frame(height: 20)
-
-                Button("快进5s") {
-                    self.time = CMTimeMakeWithSeconds(min(self.totalDuration, self.time.seconds + 5), preferredTimescale: self.time.timescale)
-                }
-            }
+            }.padding(EdgeInsets.init(top: -18, leading: 0, bottom: -18, trailing: 0))
             
         }
        
