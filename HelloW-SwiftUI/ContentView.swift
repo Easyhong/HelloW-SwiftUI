@@ -24,31 +24,35 @@ struct ContentView: View {
                      
                      ForEach(colors, id: \.self) { color in
                          
-                         VStack(alignment: .center, spacing: 0) {
-                             Rectangle().foregroundColor(color)
-                             .frame(width: UIScreen.main.bounds.width, height: 300, alignment: .center)
-                             
-                              Button(action: {
-                                         print("Delete tapped!")
-                                     }) {
-                                         HStack {
-                                             Image(systemName: "trash")
-                                                 .font(.title)
-                                             Text("Delete")
-                                                 .fontWeight(.semibold)
-                                                 .font(.title)
-                                         }
-                                         .padding()
-                                          //   .frame(minWidth: 0, maxWidth: .infinity)
-                                         .foregroundColor(.white)
-                                         .background(LinearGradient(gradient: Gradient(colors: [Color("DarkGreen"), Color("LightGreen")]), startPoint: .leading, endPoint: .trailing))
-                                         .cornerRadius(40)
-                                     }
-                              }
+                         VStack(alignment: .center, spacing: 2) {
                             
+                             Rectangle()
+                             .foregroundColor(color)
+                             .frame(width: UIScreen.main.bounds.width - 4, height: 100, alignment: .center)
+                             .cornerRadius(4)
+                             
+                        }
                       }
+                    Spacer()
+                    Button(action: {
+                               print("Delete tapped!")
+                           }) {
+                               HStack {
+                                   Image(systemName: "trash")
+                                       .font(.title)
+                                   Text("Delete")
+                                       .fontWeight(.black)
+                                       .font(.title)
+                               }.padding()
+                               .frame(minWidth: 0, maxWidth: .infinity)
+                               .foregroundColor(.white)
+                               .background(LinearGradient(gradient: Gradient(colors: [Color("DarkGreen"), Color("LightGreen")]), startPoint: .leading, endPoint: .trailing))
+                               .cornerRadius(4)
+                           }
+                    
+                    
                      
-                 }.padding(.vertical, 10)
+                 }.padding(.vertical, 0)
                  
             }
             

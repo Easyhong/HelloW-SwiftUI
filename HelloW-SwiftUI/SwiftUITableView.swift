@@ -29,8 +29,7 @@ struct PageTabViewStyleExampleView: View {
                     .cornerRadius(8)
                 }
         }
-          
-        //.tabViewStyle(PageTabViewStyle())
+//        .tabViewStyle(PageTabViewStyle())
     }
 }
 
